@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface QuestionDAO extends DAO<Integer,Question> {
     List<String> findVariantsAnswer(int questionId);
+    List<Question> findType();
+    int findQuantityQuestions();
 }

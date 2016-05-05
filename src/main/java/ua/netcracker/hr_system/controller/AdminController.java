@@ -96,7 +96,6 @@ public class AdminController {
             @RequestParam String studentForCourseCount
 
     ) {
-
         courseSetting.setId(date.getCurrentYear() * 100 + date.getCurrentMonth());
         courseSetting.setRegistrationStartDate(setDate(registrationStartDate));
         courseSetting.setInterviewEndDate(setDate(interviewEndDate));

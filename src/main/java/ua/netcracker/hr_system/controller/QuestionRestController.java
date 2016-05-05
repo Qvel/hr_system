@@ -20,7 +20,6 @@ public class QuestionRestController {
     private QuestionDAOImpl questionDao;
 
     @RequestMapping(value = "/service/getAllMandatoryQuestions", method = RequestMethod.GET)
-
     public ResponseEntity<List<Question>> getAllMandatoryQuestions() {
         List<Question> questions= (List<Question>) questionDao.findAll();
         if(questions.isEmpty()){
@@ -28,4 +27,8 @@ public class QuestionRestController {
         }
         return new ResponseEntity<List<Question>>(questions, HttpStatus.OK);
     }
+
+
+
+
 }

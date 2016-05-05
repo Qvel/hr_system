@@ -25,7 +25,7 @@ public class QuestionDAOImpl implements QuestionDAO {
     private SimpleJdbcInsert simpleJdbcInsert;
     private Question question;
 
-
+    private static final String LAST_SETTING = "SELECT id from \"hr_system\".question order by id desc limit 1";
 
     public Collection<Question> getQuestions(String sql) {
         jdbcTemplate = new JdbcTemplate(dataSource);
@@ -196,5 +196,41 @@ public class QuestionDAOImpl implements QuestionDAO {
             additionValue.add(row.get("value").toString());
         }
         return additionValue;
+    }
+
+    @Override
+    public List<Question> findType() {
+
+        jdbcTemplate = new JdbcTemplate(dataSource);
+
+        String sql = "SELECT value FROM \"hr_system\".type";
+
+        List<Question> questionType =  jdbcTemplate.query(sql, new RowMapper<Question>() {
+            @Override
+            public Question mapRow(ResultSet resultSet, int i) throws SQLException {
+                Question question = new Question();
+
+                question.setTypeValue(resultSet.getString("value"));
+
+                return question;
+            }
+        });
+        return questionType;
+    }
+
+    @Override
+    public int findQuantityQuestions() {
+        jdbcTemplate = new JdbcTemplate(dataSource);
+
+        int question = jdbcTemplate.queryForObject(LAST_SETTING, new RowMapper<Integer>() {
+            @Override
+            public Integer mapRow(ResultSet resultSet, int i) throws SQLException {
+
+                int quantityQuestions = resultSet.getInt("id");
+
+                return quantityQuestions;
+            }
+        });
+        return question;
     }
 }

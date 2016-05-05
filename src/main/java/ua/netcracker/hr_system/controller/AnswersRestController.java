@@ -1,3 +1,4 @@
+/*
 package ua.netcracker.hr_system.controller;
 
 import org.json.JSONArray;
@@ -28,9 +29,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+*/
 /**
  * Created by ksenzod on 02.05.16.
- */
+ *//*
+
 
 @RestController
 public class AnswersRestController {
@@ -140,12 +143,14 @@ public class AnswersRestController {
 //        return new ResponseEntity<>(contents, headers, HttpStatus.OK);
 //    }
 
-    /**
+    */
+/**
      * Generate pdf document
      *
      * @param candidate
      * @return form.pdf
-     */
+     *//*
+
 //    private Document generatePDF(Candidate candidate) {
 //        Document document = new Document();
 //
@@ -209,3 +214,4 @@ public class AnswersRestController {
 //        return document;
 //    }
 }
+*/

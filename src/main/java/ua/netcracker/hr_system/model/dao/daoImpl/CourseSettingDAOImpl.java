@@ -8,7 +8,7 @@ import ua.netcracker.hr_system.model.dao.daoInterface.CourseSettingDAO;
 import ua.netcracker.hr_system.model.entity.CourseSetting;
 
 import javax.sql.DataSource;
-import java.lang.reflect.Executable;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
@@ -24,10 +24,6 @@ public class CourseSettingDAOImpl implements CourseSettingDAO<CourseSetting> {
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired(required = false)
-    private CourseSetting courseSetting;
-
-
 
     @Override
     public Collection<CourseSetting> findAll() {
@@ -36,7 +32,7 @@ public class CourseSettingDAOImpl implements CourseSettingDAO<CourseSetting> {
 
     @Override
     public CourseSetting find(int id) {
-
+        CourseSetting courseSetting = new CourseSetting();
         jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "select * from \"hr_system\".course_setting where id = " + id;
 
@@ -57,7 +53,7 @@ public class CourseSettingDAOImpl implements CourseSettingDAO<CourseSetting> {
     }
 
     private CourseSetting getCourseSetting(ResultSet resultSet) throws SQLException {
-
+        CourseSetting courseSetting = new CourseSetting();
         courseSetting.setId(resultSet.getInt("id"));
         courseSetting.setInterviewEndDate(resultSet.getString("interview_end"));
         courseSetting.setInterviewStartDate(resultSet.getString("interview_start"));
@@ -122,14 +118,15 @@ public class CourseSettingDAOImpl implements CourseSettingDAO<CourseSetting> {
 
     @Override
     public int getLastIdSetting() {
+        CourseSetting courseSetting = new CourseSetting();
         jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "SELECT * from \"hr_system\".course_setting order by id desc limit 1";
         int lastId = jdbcTemplate.queryForObject(sql, new RowMapper<Integer>() {
             @Override
             public Integer mapRow(ResultSet resultSet, int i) throws SQLException {
-
-                courseSetting.setId(resultSet.getInt("id"));
-                return courseSetting.getId();
+                CourseSetting courseSetting1 = new CourseSetting();
+                courseSetting1.setId(resultSet.getInt("id"));
+                return courseSetting1.getId();
             }
         });
         return lastId;
